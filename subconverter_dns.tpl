@@ -24,14 +24,21 @@ dns:
   - https://dnsforge.de/dns-query#PG_DNS
   - https://doh.ffmuc.net/dns-query#PG_DNS
   - https://doh.mullvad.net/dns-query#PG_DNS
-  proxy-server-nameserver:
-  - {{ global.clash.direct.dns }}
-  nameserver-policy:
-    geosite:cn:
-    - {{ global.clash.direct.dns }}
   default-nameserver:
   - 8.8.8.8#PG_DNS
   - 1.1.1.1#PG_DNS
   - 9.9.9.9#PG_DNS
   - 94.140.14.14#PG_DNS
+## if exists(request.direct.dns)
+##   set direct_dns=request.direct.dns
+## else if exists(global.direct.dns)
+##   set direct_dns=global.direct.dns
+## endif
+## if exists(direct_dns)
+  proxy-server-nameserver:
+  - {{ direct_dns }}
+  nameserver-policy:
+    geosite:cn:
+    - {{ direct_dns }}
+## endif
   
