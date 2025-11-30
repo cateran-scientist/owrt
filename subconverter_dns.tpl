@@ -40,5 +40,4 @@ dns:
   nameserver-policy:
     geosite:cn:
     - {{ direct_dns }}
-{% endif
-  
+{% endif %}
