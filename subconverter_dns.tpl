@@ -25,7 +25,7 @@ dns:
   - https://doh.ffmuc.net/dns-query#PG_DNS
   - https://doh.mullvad.net/dns-query#PG_DNS
   proxy-server-nameserver:
-  - 127.0.0.1:5311
+  - {{ global.clash.direct.dns }}
   nameserver-policy:
     geosite:cn:
     - 127.0.0.1:5311
