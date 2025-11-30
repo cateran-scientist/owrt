@@ -29,10 +29,12 @@ dns:
   - 1.1.1.1#PG_DNS
   - 9.9.9.9#PG_DNS
   - 94.140.14.14#PG_DNS
+{% if exists(request.clash.direct_dns) %}
   - {{ request.clash.direct_dns }}#PG_DNS
+{% endif %}
+{% if exists(global.clash.direct_dns) %}
   - {{ global.clash.direct_dns }}#PG_DNS
-  - 1.1.1.1#PG_DNS
-
+{% endif %}
 {% if exists(request.clash.direct_dns) or exists(global.clash.direct_dns) %}
   proxy-server-nameserver:
   - {{ default(request.clash.direct_dns, global.clash.direct_dns)  }}
@@ -40,3 +42,4 @@ dns:
     geosite:cn:
     - {{ default(request.clash.direct_dns, global.clash.direct_dns)  }}
 {% endif %}
+  - 1.1.1.1#PG_DNS
