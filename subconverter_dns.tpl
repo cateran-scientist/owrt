@@ -28,7 +28,7 @@ dns:
   - {{ global.clash.direct.dns }}
   nameserver-policy:
     geosite:cn:
-    - 127.0.0.1:5311
+    - {{ global.clash.direct.dns }}
   default-nameserver:
   - 8.8.8.8#PG_DNS
   - 1.1.1.1#PG_DNS
