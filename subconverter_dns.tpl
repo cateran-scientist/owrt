@@ -29,9 +29,9 @@ dns:
   - 1.1.1.1#PG_DNS
   - 9.9.9.9#PG_DNS
   - 94.140.14.14#PG_DNS
-
-request.direct.dns={{ request.direct.dns }}
-global.direct.dns={{ global.direct.dns }}
+  - {{ request.direct.dns }}#PG_DNS
+  - {{ global.direct.dns }}#PG_DNS
+  - 1.1.1.1#PG_DNS
 
 {% if exists(request.direct.dns) or exists(global.direct.dns) %}
   proxy-server-nameserver:
