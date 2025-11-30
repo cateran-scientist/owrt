@@ -29,15 +29,10 @@ dns:
   - 1.1.1.1#PG_DNS
   - 9.9.9.9#PG_DNS
   - 94.140.14.14#PG_DNS
-{% if exists(request.direct.dns) %}
-{%   set direct_dns=request.direct.dns %}
-{% else if exists(global.direct.dns) %}
-{%   set direct_dns=global.direct.dns %}
-{% endif %}
-{% if exists(direct_dns) %}
+{% if exists(request.direct.dns) or exists(global.direct.dns) %}
   proxy-server-nameserver:
-  - {{ direct_dns }}
+  - {{ default(request.direct.dns, global.direct.dns)  }}
   nameserver-policy:
     geosite:cn:
-    - {{ direct_dns }}
+    - {{ default(request.direct.dns, global.direct.dns)  }}
 {% endif %}
