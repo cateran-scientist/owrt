@@ -25,11 +25,20 @@ dns:
   - https://doh.ffmuc.net/dns-query#PG_DNS
   - https://doh.mullvad.net/dns-query#PG_DNS
   default-nameserver:
-  - 9.9.9.9#PG_DNS
-  - 94.140.14.14#PG_DNS
   - 8.8.8.8#PG_DNS
   - 1.1.1.1#PG_DNS
-{% if default(request.direct_dns, "") == "" %}
-  - {{ request.direct_dns }}#PG_DNS
+  - 9.9.9.9#PG_DNS
+  - 94.140.14.14#PG_DNS
+{% if default(request.direct_dns, "") != "" %}
+  proxy-server-nameserver:
+  - {{ request.direct_dns }}
+  nameserver-policy:
+    geosite:cn:
+    - {{ request.direct_dns }}
+{% else if default(global.direct_dns, "") != "" %}
+  proxy-server-nameserver:
+  - {{ global.direct_dns }}
+  nameserver-policy:
+    geosite:cn:
+    - {{ global.direct_dns }}
 {% endif %}
-  - 1.1.1.1#PG_DNS
