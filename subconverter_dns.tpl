@@ -29,7 +29,7 @@ dns:
   - 94.140.14.14#PG_DNS
   - 8.8.8.8#PG_DNS
   - 1.1.1.1#PG_DNS
-{% if default(request.clash.direct_dns, "")) %}
+{% if default(request.clash.direct_dns, "") %}
   - {{ request.clash.direct_dns }}#PG_DNS
 {% endif %}
   - 1.1.1.1#PG_DNS
