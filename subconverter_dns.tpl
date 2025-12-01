@@ -41,4 +41,14 @@ dns:
   nameserver-policy:
     geosite:cn:
     - {{ global.direct_dns }}
+{% else %}
+  proxy-server-nameserver:
+  - 114.114.114.114
+  - 223.5.5.5
+  - 119.29.29.29
+  nameserver-policy:
+    geosite:cn:
+    - 114.114.114.114
+    - 223.5.5.5
+    - 119.29.29.29
 {% endif %}
